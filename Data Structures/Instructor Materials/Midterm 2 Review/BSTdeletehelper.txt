@@ -1,0 +1,24 @@
+void BST::deleteHelper(node *& dn, node *& root){
+	if(!dn){ std::cout << "nothing to delete" << std::endl; return; }
+
+	bool isRoot = dn==root;
+	bool isLeft = isRoot ? false : (dn->parent->left==dn);
+	
+	if(!dn->left and !dn->right){
+		if(isLeft and !isRoot) dn->parent->left = nullptr;
+		else if(!isLeft and !isRoot) dn->parent->right = nullptr;
+		delete dn;
+		dn = nullptr;
+	}
+	else if(dn->right){
+		node * mn = min(dn->right);
+		dn->key = mn->key;
+		deleteHelper(mn, root);
+	}
+	else if(dn->left){
+		if(isLeft and !isRoot) dn->parent->left = dn->left;
+		else if(!isLeft and !isRoot) dn->parent->right = dn->left;
+		dn->left->parent = dn->parent;
+		delete dn;
+	}
+}

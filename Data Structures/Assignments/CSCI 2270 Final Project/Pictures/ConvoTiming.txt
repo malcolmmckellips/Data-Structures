@@ -1,0 +1,197 @@
+//Timing for enquing in the linked list
+    
+    /*
+    //Timing for 100:
+    
+    
+    double startTime,endTime;
+    vector <double> EnqueLLTimes;
+    priorityQueueLL TimingLLPQ;
+    double execTime = 0;
+    for (int i = 0; i<5000 ; i++){
+        startTime = clock();
+        for (int j=0;j<100;j++){
+            TimingLLPQ.enqueue(patientArray[j]);
+        }
+        endTime = clock();
+        execTime = (double)(endTime-startTime)/CLOCKS_PER_SEC;
+        EnqueLLTimes.push_back(execTime);
+        TimingLLPQ.dequeueAll();
+    }
+    cout<<"Enqueing 100 elements in a linked list PQ took on average "<<mean(EnqueLLTimes)<<" seconds"<<endl;
+    
+    
+    //Timing for 200
+    
+    double startTime2,endTime2;
+    vector <double> EnqueLLTimes2;
+    priorityQueueLL TimingLLPQ2;
+    double execTime2 = 0;
+    for (int i = 0; i<5000 ; i++){
+        startTime2 = clock();
+        for (int j=0;j<200;j++){
+            TimingLLPQ2.enqueue(patientArray[j]);
+        }
+        endTime2 = clock();
+        execTime2 = (double)(endTime2-startTime2)/CLOCKS_PER_SEC;
+        EnqueLLTimes2.push_back(execTime2);
+        TimingLLPQ2.dequeueAll();
+    }
+    cout<<"Enqueing 200 elements in a linked list PQ took on average "<<mean(EnqueLLTimes2)<<" seconds"<<endl;
+    
+     
+    //Timing for 300
+    
+    double startTime3,endTime3;
+    vector <double> EnqueLLTimes3;
+    priorityQueueLL TimingLLPQ3;
+    double execTime3 = 0;
+    for (int i = 0; i<5000 ; i++){
+        startTime3 = clock();
+        for (int j=0;j<300;j++){
+            TimingLLPQ3.enqueue(patientArray[j]);
+        }
+        endTime3 = clock();
+        execTime3 = (double)(endTime3-startTime3)/CLOCKS_PER_SEC;
+        EnqueLLTimes3.push_back(execTime3);
+        TimingLLPQ3.dequeueAll();
+    }
+    cout<<"Enqueing 300 elements in a linked list PQ took on average "<<mean(EnqueLLTimes3)<<" seconds"<<endl;
+    
+     
+    //Timing for 400
+    
+    double startTime4,endTime4;
+    vector <double> EnqueLLTimes4;
+    priorityQueueLL TimingLLPQ4;
+    double execTime4 = 0;
+    for (int i = 0; i<5000 ; i++){
+        startTime4 = clock();
+        for (int j=0;j<400;j++){
+            TimingLLPQ4.enqueue(patientArray[j]);
+        }
+        endTime4 = clock();
+        execTime4 = (double)(endTime4-startTime4)/CLOCKS_PER_SEC;
+        EnqueLLTimes4.push_back(execTime4);
+        TimingLLPQ4.dequeueAll();
+    }
+    cout<<"Enqueing 400 elements in a linked list PQ took on average "<<mean(EnqueLLTimes4)<<" seconds"<<endl;
+    
+     
+    //Timing for 500
+    
+    double startTime5,endTime5;
+    vector <double> EnqueLLTimes5;
+    priorityQueueLL TimingLLPQ5;
+    double execTime5 = 0;
+    for (int i = 0; i<5000 ; i++){
+        startTime5 = clock();
+        for (int j=0;j<500;j++){
+            TimingLLPQ5.enqueue(patientArray[j]);
+        }
+        endTime5 = clock();
+        execTime5 = (double)(endTime5-startTime5)/CLOCKS_PER_SEC;
+        EnqueLLTimes5.push_back(execTime5);
+        TimingLLPQ5.dequeueAll();
+    }
+    cout<<"Enqueing 500 elements in a linked list PQ took on average "<<mean(EnqueLLTimes5)<<" seconds"<<endl;
+    
+    
+    //Timing for 600
+    
+    double startTime6,endTime6;
+    vector <double> EnqueLLTimes6;
+    priorityQueueLL TimingLLPQ6;
+    double execTime6 = 0;
+    for (int i = 0; i<5000 ; i++){
+        startTime6 = clock();
+        for (int j=0;j<600;j++){
+            TimingLLPQ6.enqueue(patientArray[j]);
+        }
+        endTime6 = clock();
+        execTime6 = (double)(endTime6-startTime6)/CLOCKS_PER_SEC;
+        EnqueLLTimes6.push_back(execTime6);
+        TimingLLPQ6.dequeueAll();
+    }
+    cout<<"Enqueing 600 elements in a linked list PQ took on average "<<mean(EnqueLLTimes6)<<" seconds"<<endl;
+    
+    
+    //Timing for 700
+    
+    double startTime7,endTime7;
+    vector <double> EnqueLLTimes7;
+    priorityQueueLL TimingLLPQ7;
+    double execTime7 = 0;
+    for (int i = 0; i<5000 ; i++){
+        startTime7 = clock();
+        for (int j=0;j<700;j++){
+            TimingLLPQ7.enqueue(patientArray[j]);
+        }
+        endTime7 = clock();
+        execTime7 = (double)(endTime7-startTime7)/CLOCKS_PER_SEC;
+        EnqueLLTimes7.push_back(execTime7);
+        TimingLLPQ7.dequeueAll();
+    }
+    cout<<"Enqueing 700 elements in a linked list PQ took on average "<<mean(EnqueLLTimes7)<<" seconds"<<endl;
+    
+     
+    //Timing for 800
+    
+    double startTime8,endTime8;
+    vector <double> EnqueLLTimes8;
+    priorityQueueLL TimingLLPQ8;
+    double execTime8 = 0;
+    for (int i = 0; i<5000 ; i++){
+        startTime8 = clock();
+        for (int j=0;j<800;j++){
+            TimingLLPQ8.enqueue(patientArray[j]);
+        }
+        endTime8 = clock();
+        execTime8 = (double)(endTime8-startTime8)/CLOCKS_PER_SEC;
+        EnqueLLTimes8.push_back(execTime8);
+        TimingLLPQ8.dequeueAll();
+    }
+    cout<<"Enqueing 800 elements in a linked list PQ took on average "<<mean(EnqueLLTimes8)<<" seconds"<<endl;
+    
+    //Timing for all 880
+    
+    double startTime88,endTime88;
+    vector <double> EnqueLLTimes88;
+    priorityQueueLL TimingLLPQ88;
+    double execTime88 = 0;
+    for (int i = 0; i<5000 ; i++){
+        startTime88 = clock();
+        for (int j=0;j<880;j++){
+            TimingLLPQ88.enqueue(patientArray[j]);
+        }
+        endTime88 = clock();
+        execTime88 = (double)(endTime88-startTime88)/CLOCKS_PER_SEC;
+        EnqueLLTimes88.push_back(execTime88);
+        TimingLLPQ88.dequeueAll();
+    }
+    cout<<"Enqueing all 880 elements in a linked list PQ took on average "<<mean(EnqueLLTimes88)<<" seconds"<<endl;
+    */
+
+
+void TimeLLDequeue(int size, vector <patient> patientArray){
+    priorityQueueLL TimingDQLLPQ;
+    double alpha, omega;
+    vector <double> DequeueLLTimes;
+    double interim = 0;
+    for (int i=0; i<5000; i++){
+        for (int j=0; j<size; j++){
+            TimingDQLLPQ.enqueue(patientArray[j]);
+        }
+        alpha = clock();
+        //for (int k = 0; k<size ; k++){
+          //  TimingDQLLPQ.dequeue();
+        //}
+        TimingDQLLPQ.dequeueAll();
+        omega = clock();
+        interim = (double)(omega-alpha)/CLOCKS_PER_SEC;
+        DequeueLLTimes.push_back(interim);
+        //TimingDQLLPQ.dequeueAll();
+    }
+    cout<<"Dequeueing "<<size<<" elements in a linked list PQ took on average "<<mean(DequeueLLTimes)<<" seconds"<<endl;
+}
+    

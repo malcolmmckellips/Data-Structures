@@ -1,0 +1,67 @@
+#include <iostream>
+#include "bst.hpp"
+
+void printHelper(node *& nn){
+	if(!nn) return;
+	printHelper(nn->left);
+	std::cout << nn->key << std::endl;
+	printHelper(nn->right);
+}
+
+void BST::print(){
+	printHelper(root);
+}
+
+void BST::insert(int key){
+	if(!root){
+		root = new node(key);
+		return;
+	}
+
+	node * temp = root;
+	while(temp){
+		if(key > temp->key){
+			if(temp->right) temp = temp->right;
+			else{
+				temp->right = new node(key);
+				temp->right->parent = temp;
+				break;
+			}
+		}
+		else{ // assume key never equals temp->key
+			if(temp->left) temp = temp->left;
+			else{
+				temp->left = new node(key);
+				temp->left->parent = temp;
+				break;
+			}
+		}
+	}
+}
+
+node * min(node * nn){
+	if(!nn) return nullptr;
+	while(nn->left)
+		nn = nn->left;
+	return nn;
+}
+
+node * BST::search(node * nn, int key){
+	if(!nn) return nullptr;
+
+	if(key == nn->key)
+		return nn;
+	else if(key > nn->key)
+		return search(nn->right, key);
+	else
+		return search(nn->left, key);
+}
+
+void deleteHelper(node *& dn, node *& root){
+	// your code here
+}
+
+void BST::deleteNode(int key){
+	node * dn = search(root, key);
+	deleteHelper(dn, root);
+}

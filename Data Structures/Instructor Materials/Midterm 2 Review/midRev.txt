@@ -1,0 +1,257 @@
+//Problem 1 (Check if intermediate is on shortest path between source and destination)
+
+void Graph::shortestPath(string source, string destination, string intermediate){
+    vertex *start, *end;
+    for (int i =0; i < (int)vertices.size(); i++){
+        vertices[i].visited = false;
+        if (vertices[i].name == source){
+            start = &vertices[i];
+        }
+        if (vertices[i].name == destination){
+            end = &vertices[i];
+        }
+    }
+    queue <vertex*> q;
+    q.push(start);
+    start->visited = true;
+    while (!q.empty()){
+        vertex *n = q.front();
+        q.pop();
+        for (int i=0; i<(int)n->adj.size();i++){
+            if (!n->adj[i].v->visited){
+                n->adj[i].v->visited=true;
+                q.push(n->adj[i].v);
+                n->adj[i].v->prev=n;
+            }
+        }
+    }
+    vertex *temp = end;
+    bool passed = false;
+    while (temp!=start){
+        if (temp->name == intermediate)
+            passed = true;
+        temp = temp->prev;
+    }
+    if (passed)
+        cout<<"Yes";
+    else
+        cout<<"No";
+    
+}
+
+
+//Problem 2 (see if each node has an incorrect parent ID)
+
+void Graph::printMislabeledParents(int startVertex) {
+	vertex *start;
+	for (int i = 0; i < (int)vertices.size(); i++) {
+		vertices[i].visited = false;
+		if (vertices[i].value == startVertex) {
+			start = &vertices[i];
+		}
+	}
+
+	queue<vertex*> Q;
+	Q.push(start);
+	start->visited = true;
+	cout << start->value << endl;
+	while (!Q.empty()) {
+		vertex *node = Q.front();
+		Q.pop();
+		for (int i=0;i < (int)node->adj.size();i++){
+		    if (!node->adj[i].v->visited){
+		        if(node->adj[i].v->parentID != node->value)
+		            cout<<node->adj[i].v->value<<endl;
+		        node->adj[i].v->visited = true;
+		        Q.push(node->adj[i].v);
+		    }
+		}	
+        
+	}
+}
+
+//Problem 3 (find the odd values in a graph and print them in BFS order)
+
+void Graph::findOddAdjacent(int startVertex) {
+	vertex *start;
+	for (int i = 0; i < (int)vertices.size(); i++) {
+		vertices[i].visited = false;
+		if (vertices[i].value == startVertex) {
+			start = &vertices[i];
+		}
+	}
+    
+	queue<vertex*> Q;
+	Q.push(start);
+	start->visited = true;
+	cout << start->value << " ";
+	while (!Q.empty()) {
+		vertex *node = Q.front();
+		Q.pop();
+		for (int i = 0; i < (int)node->adj.size(); i++) {
+            if (!node->adj[i].v->visited){
+                node->adj[i].v->visited = true;
+                Q.push(node->adj[i].v);
+                if (node->adj[i].v->value % 2 != 0)
+                    cout<<node->adj[i].v->value<<" ";
+            }
+		}
+	}
+}
+
+//Problem 4 (Find the node with the highest number of adjacent vertices)
+
+void Graph::findNodeWithMaximumAdjacent(int startVertex) {
+	vertex *start;
+	for (int i = 0; i < (int)vertices.size(); i++) {
+		vertices[i].visited = false;
+		if (vertices[i].value == startVertex) {
+			start = &vertices[i];
+		}
+	}
+	queue<vertex*> Q;
+	Q.push(start);
+	start->visited = true;
+	cout << start->value << " ";
+    long int maxAdj=0;
+    vector <int> maxAdjKeys;
+        while (!Q.empty()) {
+		vertex *n = Q.front();
+		Q.pop();
+		if ((int)n->adj.size() > maxAdj){
+            maxAdj=n->adj.size();
+            maxAdjKeys.clear();
+            maxAdjKeys.push_back(n->value);
+        }
+        else if ((int)n->adj.size() == maxAdj)
+            maxAdjKeys.push_back(n->value);
+        for (int x=0; x < (int)n->adj.size() ; x++){
+            if (! n->adj[x].v->visited){
+                n->adj[x].v->visited = true;
+                cout<<n->adj[x].v->value<<" ";
+                Q.push(n->adj[x].v);
+            }
+        }
+	}
+	cout<<endl;
+	for (int i =0; i< (int)maxAdjKeys.size();i++)
+        cout<<maxAdjKeys[i]<<" ";
+}
+
+//Problem 5 (Print the nodes of a tree that are in between two specified nodes in order)
+
+#include <vector>
+
+vector <char> tree;
+Node *tail;
+
+void traverse (TreeNode *n){
+    if (n->left != NULL)
+        traverse(n->left);
+    tree.push_back(n->key);
+    if (n->right!=NULL)
+        traverse(n->right);
+}
+
+void RangeSearch(TreeNode *node, char m, char n){
+   traverse(node);
+   for (int i=0; i<(int)tree.size();i++){
+       if (m<=tree[i] && tree[i]<=n){
+           if (head == NULL){
+                Node *temp=new Node;
+                temp->key = tree[i];
+                temp->next=NULL;
+                head=temp;
+                tail = head;
+            }
+            else{
+                Node *temp=new Node;
+                temp->key=tree[i];
+                tail->next = temp;
+                tail=temp;
+                tail->next=NULL;
+            }
+       }
+   }
+}
+
+//Problem 6 (Insert a node into a BST)
+
+Node* insert(Node *root, int value){
+    Node *temp = root;
+    Node *n = new Node(NULL,NULL,NULL);
+    n->key = value;
+    Node *prev = NULL;
+    while (temp!=NULL){
+        prev = temp;
+        if (n->key < temp->key){
+            temp=temp->left;
+        }
+        else 
+            temp=temp->right;
+    }
+    if (prev == NULL)
+            root = n;
+    else if (n-> key < prev->key){
+        prev->left = n;
+        n->parent = prev;
+        cout<<"inserted: "<<n->key<<" left child of: "<<n->parent->key<<endl;
+    }
+    else{
+        prev->right = n;
+        n->parent = prev;
+        cout<<"inserted: "<<n->key<<" right child of: "<<n->parent->key<<endl;
+    }
+    return root;
+}
+
+//Problem 7 (Color all of the nodes an even distance from the start red and those an odd distance from the start black)
+
+void Graph::colorVertices(string sourceVertex){
+    vertex *vStart;
+    for (int i = 0; i < vertices.size(); i++){ //searching the vertices array for the start vertex
+        if (vertices[i].name == sourceVertex){
+            vStart = &vertices[i];
+        }
+    }
+    
+    vStart -> visited = true; //mark the start as visited and add it to a queue and color it red
+    vStart -> color = "Red";
+    queue <vertex*> q;
+    q.push(vStart);
+    vertex *n;
+    
+    while (!q.empty()){
+        n=q.front(); //dequeue first element of queue
+        q.pop();
+        
+        for(int x=0; x < n->adj.size(); x++){ //scan the adjacency list of each element in the queue
+            if (!n->adj[x].v->visited){ //if the adjacent vertex hasn't been visited add it to be scanned and mark it as visited
+                n->adj[x].v->visited = true;
+                q.push(n->adj[x].v);
+                
+                if (n->color == "Red"){ //if the vertex who's adjacency list is being scanned is red, those around it are black
+                    n->adj[x].v->color = "Black";
+                }
+                if (n->color == "Black"){ //vise versa
+                    n->adj[x].v->color = "Red";
+                }
+            }
+        }
+    }
+}
+
+//Problem 8 (Print things with adjacency list size of 0 (separated with a space))
+
+void Graph::findVerticesWithNoAdjacentVertices(){
+    bool notFound = true;
+    for (int i = 0; i<vertices.size(); i++){
+        if (vertices[i].adj.size() == 0){
+            cout << vertices[i].name <<" ";
+            notFound=false;
+        }
+    }
+    if (notFound){
+        cout<<"Not Found!";
+    }
+}

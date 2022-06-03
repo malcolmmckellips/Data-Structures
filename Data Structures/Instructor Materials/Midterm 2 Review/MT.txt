@@ -1,0 +1,61 @@
+void replaceMaxWithMin(TreeNode *root){
+    if (root != NULL){
+    int smallKey;
+    TreeNode *current = root;
+    while (current->leftChild != NULL){
+        current = current->leftChild;
+    }
+    smallKey = current -> key;
+    
+    //deleting node
+    if (current->leftChild == NULL && current->rightChild == NULL)
+        current->parent->leftChild=NULL;
+    else if (current->leftChild == NULL){ //Right Child is not null
+        current->parent->leftChild=current->rightChild;
+    }
+    else{ //Left Child is not null
+        current->parent->leftChild=current->leftChild;
+    }
+    
+    //Finding largest
+    TreeNode *walker = root;
+    while (walker -> rightChild != NULL){
+        walker = walker ->rightChild;
+    }
+    walker->key=smallKey;
+    }
+}
+
+bool Graph::ifPathExistsLessThanDist(string vertex1, string vertex2, int dist){
+    vertex *start;
+    for (int i=0;i<(int)vertices.size();i++){
+        vertices[i].visited = false;
+        if (vertices[i].name == vertex1){
+            start = vertices[i];
+        }
+    }
+    queue <vertex*> q;
+    q.push(start);
+    start->visited = true;
+    start->distance = 0;
+    while(!q.empty()){
+        vertex *n = q.front();
+        q.pop();
+        for (int i=0;i<(int)n->adj.size();i++){
+            if (!n->adj[i].v->visited){
+                n->adj[i].v->distance = n->distance +1;
+                if(n->adj[i].v->name == vertex2){
+                    if (n->adj[i].v->distance < dist)
+                        return true;
+                    else
+                        return false;
+                }
+                else{
+                    n->adj[i].v->visited = true;
+                    q.push(n->adj[i].v);
+                }
+            }
+        }
+    }
+    return false;
+}
